@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'FlyUIComponents_Example' do
+  pod 'FlyUIComponents', :path => '../'
+
+  target 'FlyUIComponents_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
