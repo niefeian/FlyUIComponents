@@ -1,0 +1,65 @@
+PODS:
+  - AutoModel (0.1.4)
+  - FlyUIComponents (0.1.0):
+    - AutoModel
+    - NFAToolkit
+    - ProThirdpart
+    - SnapKit (~> 4.2.0)
+    - SwiftProjects
+  - MBProgressHUD (1.2.0)
+  - NFAFile (0.1.1)
+  - NFATipsUI (0.1.1):
+    - NFAToolkit
+  - NFAToolkit (0.1.1)
+  - ProThirdpart (0.1.1):
+    - MBProgressHUD
+    - SDWebImage (~> 5.5.2)
+    - SnapKit (~> 4.2.0)
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
+  - SnapKit (4.2.0)
+  - SwiftProjects (0.0.21):
+    - NFAFile
+    - NFATipsUI
+    - NFAToolkit
+
+DEPENDENCIES:
+  - AutoModel
+  - FlyUIComponents (from `../`)
+  - NFAToolkit
+  - ProThirdpart
+  - SnapKit (~> 4.2.0)
+  - SwiftProjects
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AutoModel
+    - MBProgressHUD
+    - NFAFile
+    - NFATipsUI
+    - NFAToolkit
+    - ProThirdpart
+    - SDWebImage
+    - SnapKit
+    - SwiftProjects
+
+EXTERNAL SOURCES:
+  FlyUIComponents:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AutoModel: cbd219be08706a516db246fa3937d3209221637c
+  FlyUIComponents: fc202381b094a1069a872fb54da406fec3be7521
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  NFAFile: 780e49c1db036e6bb400d3caba36d11b948d6766
+  NFATipsUI: 7d996b3db35d89eaa16b98d8f8b124d2314648dd
+  NFAToolkit: 71585955a80b8d7b820939e6e256ace92c998120
+  ProThirdpart: b8c0e10da0d173ab624cab9fdef4acf98c887793
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftProjects: b0cc2ef76b489b96d13f4e8e4b8fab4312a5ad0a
+
+PODFILE CHECKSUM: 95df840d96ed1395086ab0a2ecb89b355aa128e2
+
+COCOAPODS: 1.9.3
