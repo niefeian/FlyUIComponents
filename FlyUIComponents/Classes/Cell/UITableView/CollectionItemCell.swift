@@ -17,8 +17,11 @@ public class CollectionItemCell: CusAutoCollectionCell {
             self.reloadUI()
         }
     }
-    
+    public var bgText : UIView!
     public var lineSpacing : CGFloat = 0
+    public var indexPath: IndexPath!
+    public var imageViews : UIImageView!
+    public var cellText : UILabel!
     
     func reloadUI(){
         initializePage()
@@ -48,8 +51,7 @@ public class CollectionItemCell: CusAutoCollectionCell {
                case .图文:
                     getSubview(autoViewClass: .imageView, index: 1)?.snp.makeConstraints({ (make) in
                         make.centerX.equalToSuperview()
-                        make.top.equalTo(10)
-                        make.size.equalTo(45.pd6sW)
+                        make.size.equalTo(75.pd6sW)
                     })
 
                     getSubview(autoViewClass: .label, index: 1)?.snp.makeConstraints({ (make) in
@@ -58,11 +60,13 @@ public class CollectionItemCell: CusAutoCollectionCell {
                         make.height.equalTo(12)
                         make.bottom.equalToSuperview().offset(-5)
                     })
-               case .图:
-                    getSubview(autoViewClass: .imageView, index: 1)?.snp.makeConstraints({ (make) in
-                        make.size.equalToSuperview()
-                        make.center.equalToSuperview()
-                    })
+                    imageViews = getView(autoViewClass: .imageView, index: 1)
+           case .图:
+                getSubview(autoViewClass: .imageView, index: 1)?.snp.makeConstraints({ (make) in
+                    make.size.equalToSuperview()
+                    make.center.equalToSuperview()
+                })
+                imageViews = getView(autoViewClass: .imageView, index: 1)
         case .文字下滑块:
             getSubview(autoViewClass: .label, index: 1)?.snp.makeConstraints({ (make) in
                 make.center.equalToSuperview()
@@ -87,16 +91,17 @@ public class CollectionItemCell: CusAutoCollectionCell {
                 make.center.equalToSuperview()
                 make.size.equalToSuperview()
             })
+            bgText = getSubview(autoViewClass: .label, index: 1)
+//            Tools.masksToBounds(cornerView: getSubview(autoViewClass: .label, index: 1)!, cornerRadius: 25.pd6sW/2, borderWidth: 1, borderColor: .initString("#D8D8D8"))
         case .none:
             break
         }
         super.initializePage()
+        cellText = getSubview(autoViewClass: .label, index: 1) as? UILabel
     }
     
     public override func initializeDraw() {
-        switch layoutType {
-            
-        case .图文:
+        switch layoutType {        case .图文:
             break
         case .图:
             break
@@ -114,11 +119,18 @@ public class CollectionItemCell: CusAutoCollectionCell {
     }
     public func setInfo(_ image : String , title : String , imageUrl : String = ""){
         if imageUrl.count > 0 {
-            (getSubview(autoViewClass: .imageView, index: 1) as? UIImageView)?.setImageFromURL(imageUrl)
-        }else{
-            (getSubview(autoViewClass: .imageView, index: 1) as? UIImageView)?.image = UIImage.init(named: image)
+            imageViews?.setImageFromURL(imageUrl)
+            imageViews.isHidden = false
+        }else if image.count > 0{
+            imageViews?.image = UIImage.init(named: image)
+            imageViews.isHidden = false
         }
-        (getSubview(autoViewClass: .imageView, index: 1) as? UIImageView)?.contentMode = .scaleAspectFit
+        else
+        {
+            imageViews.image = nil
+            imageViews.isHidden = true
+        }
+        imageViews?.contentMode = .scaleAspectFit
         (getSubview(autoViewClass: .label, index: 1) as? UILabel)?.text = title
         (getSubview(autoViewClass: .label, index: 1) as? UILabel)?.setFont(12)
         (getSubview(autoViewClass: .label, index: 1) as? UILabel)?.textColor = .initString("#333333")
@@ -127,15 +139,18 @@ public class CollectionItemCell: CusAutoCollectionCell {
     public func setInfo(_ title : String , showView : Bool){
         
         if let label = getSubview(autoViewClass: .label, index: 1  , autoInit: true) as? UILabel {
-            label.font = showView ? UIFont.boldSystemFont(ofSize: 15.pd6sW) : UIFont.systemFont(ofSize: 15.pd6sW)
-            label.textColor =  showView ? .initString("##181819") : .initString("###7C828D")
+            label.font = UIFont.systemFont(ofSize: 12.pd6sW)
+            label.textColor =  .initString("#343434")
             label.text = title
             label.numberOfLines = 0
             label.textAlignment = .center
+            
         }
         
         (getSubview(autoViewClass: .view, index: 2 , autoInit: true))?.isHidden = !showView
     }
+    
+    
     
     public func setRichInfo(_ attributedText : NSAttributedString ){
         if let label = getSubview(autoViewClass: .label, index: 1  , autoInit: true) as? UILabel {
@@ -160,7 +175,6 @@ public class CollectionItemCell: CusAutoCollectionCell {
         }else{
             if let view  = getSubview(autoViewClass: .view, index: 1 , autoInit: true) {
                 view.backgroundColor = .initString("#F5F7FA")
-//                Tools.setCornerRadius(view, rate: 5)
                 Tools.masksToBounds(cornerView: view ,cornerRadius:5,borderWidth:1 , borderColor: .initString("F5F7FA"))
                 view.isHidden = false
             }
